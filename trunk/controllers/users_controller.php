@@ -13,7 +13,6 @@
  * Long description for class (if any)...
  *
  * @author			Kevin Lloyd
- * @todo			Read settings for emaling from Canfigure::read();
  */
 class UsersController extends UserAppController {
 

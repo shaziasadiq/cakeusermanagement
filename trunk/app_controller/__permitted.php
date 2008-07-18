@@ -11,17 +11,15 @@
 			
 			// var $uses forces weird behavior
 			App::import('Model', 'User.User'); 
-			App::import('Model', 'User.Group');
 			$this->User = new User;
-			$this->Group = new Group;
-			
+
 			//Now bring in the current users full record along with groups
 			$this->User->contain(array('Group.id'));
 			$thisGroups = $this->User->find(array('User.id'=>$this->Auth->user('id')), 'id');
 			$thisGroups = $thisGroups['Group'];
-			$this->Group->contain(false, array('Permission.name'));
+			$this->User->Group->contain(false, array('Permission.name'));
 			foreach($thisGroups as $thisGroup){
-				$thisPermissions = $this->Group->find(array('Group.id'=>$thisGroup['id']), 'id');
+				$thisPermissions = $this->User->Group->find(array('Group.id'=>$thisGroup['id']), 'id');
 				$thisPermissions = $thisPermissions['Permission'];
 				foreach($thisPermissions as $thisPermission){
 					$permissions[]=low($thisPermission['name']);
@@ -42,6 +40,15 @@
 				return true;//Controller Wide Bypass Found
 			}
 			if($permission == $controllerName.':'.$actionName){
+				return true;//Specific permission found
+			}
+			/*
+			 * @todo Add support for: 'controller/users' - test
+			 */
+			$permission = low(Router::normalize($permission));
+			$url = low(Router::normalize($this->params['url']['url']));
+			$url = substr($url, 0, strlen($permission));
+			if($permission == $url){
 				return true;//Specific permission found
 			}
 		}

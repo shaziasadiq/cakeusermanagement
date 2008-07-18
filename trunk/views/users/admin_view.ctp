@@ -59,7 +59,7 @@
 		<li><?php echo $html->link(sprintf(__('Delete %s', true), __('User', true)), array('action'=>'delete', $user['User']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['User']['id'])); ?> </li>
 		<li><?php echo $html->link(sprintf(__('List %s', true), __('Users', true)), array('action'=>'index')); ?> </li>
 		<li><?php echo $html->link(sprintf(__('New %s', true), __('User', true)), array('action'=>'add')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('List %s', true), __('Groups', true)), array('controller'=> 'groups', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(sprintf(__('New %s', true), __('Group', true)), array('controller'=> 'groups', 'action'=>'add')); ?> </li>
+		<li><?php echo $html->link(sprintf(__('List %s', true), __('Groups', true)), array('controller'=> 'groups', 'action'=>'index', 'admin'=>false)); ?> </li>
+		<li><?php echo $html->link(sprintf(__('New %s', true), __('Group', true)), array('controller'=> 'groups', 'action'=>'add', 'admin'=>false)); ?> </li>
 	</ul>
 </div>

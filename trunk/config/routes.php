@@ -3,17 +3,14 @@
 	$admin = '/'.Configure::read('Routing.admin');
 
 	// Controller routing.
-	Router::connect('/users/permissions', array('plugin'=>'user', 'controller' => 'permissions'));
-	Router::connect('/users/groups', array('plugin'=>'user', 'controller' => 'groups'));
-	Router::connect('/users', array('plugin'=>'user', 'controller' => 'users', 'action' => 'index'));
 	
-	// Admin routing
-	Router::connect($admin.'/users/view/*', array('plugin'=>'user', 'controller' => 'users', 'admin' => true, 'action' => 'edit'));
-	Router::connect($admin.'/users/edit/*', array('plugin'=>'user', 'controller' => 'users', 'admin' => true, 'action' => 'edit'));
-	Router::connect($admin.'/users/*', array('plugin'=>'user', 'controller' => 'users', 'admin' => true));
-	Router::connect($admin.'/users/groups', array('plugin'=>'user', 'controller' => 'groups', 'admin' => true));
-	Router::connect($admin.'/users/permissions', array('plugin'=>'user', 'controller' => 'permissions', 'admin' => true));
-
+	Router::connect('/users/', array('plugin'=>'user', 'controller' => 'users', 'action' => 'index'));
+	Router::connect('/users/:action', array('plugin'=>'user', 'controller' => 'users'));
+	Router::connect('/users/:controller/:action', array('plugin'=>'user'));
+	
+	Router::connect($admin.'/users/', array('plugin'=>'user', 'controller' => 'users', 'action' => 'index', 'admin'=>true));
+	Router::connect($admin.'/users/:action', array('plugin'=>'user', 'controller' => 'users', 'admin'=>true));
+	
 	// User routes
 	Router::connect('/login', array('plugin' => 'user', 'controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('plugin' => 'user', 'controller' => 'users', 'action' => 'logout'));
