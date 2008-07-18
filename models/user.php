@@ -14,8 +14,16 @@
  *
  */
 class User extends UserAppModel {
-
+	var $displayField = 'username';
+	
 	var $name = 'User';
+	var $hasAndBelongsToMany = array('Group' => array('className' => 'User.Group',
+                        'joinTable' => 'groups_users',
+                        'foreignKey' => 'user_id',
+                        'associationForeignKey' => 'group_id',
+                        'unique' => true
+		)
+	);
 	var $actsAs = array(
 		'Sluggable' => array('label' => array('fname','lname'), 'overwrite' => true),
 		'Containable');
@@ -61,14 +69,6 @@ class User extends UserAppModel {
 			'rule' => array('identicalFieldValues', 'email' ),
 			'message' => 'Please re-enter your email address twice so that the values match'
             ),
-	);
-
-	var $hasAndBelongsToMany = array('Group' => array('className' => 'Group',
-                        'joinTable' => 'groups_users',
-                        'foreignKey' => 'user_id',
-                        'associationForeignKey' => 'group_id',
-                        'unique' => true
-		)
 	);
 
 /**

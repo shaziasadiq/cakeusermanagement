@@ -1,13 +1,11 @@
 CREATE TABLE `user__groups` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
+  `description` varchar(200),
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY  (`id`)
 );
-
-INSERT INTO `user__groups` (`name`) VALUES ('SuperAdmin');
-INSERT INTO `user__groups` (`name`) VALUES ('Amdin');
 
 CREATE TABLE `user__users` (
   `id` int(11) unsigned NOT NULL auto_increment,
@@ -37,8 +35,9 @@ CREATE TABLE `user__groups_users` (
 );
 
 CREATE TABLE `user__permissions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(40) NOT NULL,
+  `description` varchar(200),
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY  (`id`)

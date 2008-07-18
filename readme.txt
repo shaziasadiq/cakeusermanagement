@@ -11,16 +11,24 @@ This authentication will consist of the following:
  - todo: Just add more config
  - todo: Move login/logig Redirect or make config
  
-Add these to app_controller in appropriate places:
+ 
+ 
+Installation:
+
+- Uncomment Configure::write('Routing.admin', 'admin'); in core.php
+- Modify core.php as needed
+- If used, add new database config for diff prefix, etc.
+
+- Add these to app_controller in appropriate places:
 
 	var $components = array('Auth', 'Cookie');
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		// Must be unauthorized access for all!
 		$this->Auth->allow('display');
 		$this->Auth->loginAction = array('plugin'=>'user','controller' => 'users', 'action' => 'login', 'admin' => false);
 		$this->set('user_id', $this->Auth->user('id'));
+		if () () 
 	}
 	
 	function beforeRender() {
@@ -36,5 +44,8 @@ Add these to app_controller in appropriate places:
 	}
 	
 	
-Add these to routes.php:
+- Add these to routes.php:
 	include(APP.'plugins'.DS.'user'.DS.'config'.DS.'routes.php');
+
+- Add these to core.php:
+	include(APP.'plugins'.DS.'user'.DS.'config'.DS.'core.php');
